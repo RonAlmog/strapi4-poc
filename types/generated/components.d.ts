@@ -13,6 +13,29 @@ export interface BlocksHero extends Schema.Component {
   };
 }
 
+export interface BlocksPricing extends Schema.Component {
+  collectionName: 'components_blocks_pricings';
+  info: {
+    displayName: 'Pricing';
+    icon: 'gift';
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+  };
+}
+
+export interface BlocksRow extends Schema.Component {
+  collectionName: 'components_blocks_rows';
+  info: {
+    displayName: 'Row';
+    icon: 'bulletList';
+  };
+  attributes: {
+    card: Attribute.Component<'elements.card', true>;
+  };
+}
+
 export interface ElementsButonLink extends Schema.Component {
   collectionName: 'components_elements_buton_links';
   info: {
@@ -24,6 +47,39 @@ export interface ElementsButonLink extends Schema.Component {
     link: Attribute.String;
     isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
     type: Attribute.Enumeration<['PRIMARY', 'SECONDARY']>;
+  };
+}
+
+export interface ElementsCard extends Schema.Component {
+  collectionName: 'components_elements_cards';
+  info: {
+    displayName: 'Card';
+    icon: 'command';
+  };
+  attributes: {
+    image: Attribute.Media<'images'>;
+    heading: Attribute.String;
+    description: Attribute.Text;
+  };
+}
+
+export interface ElementsPricingCard extends Schema.Component {
+  collectionName: 'components_elements_pricing_cards';
+  info: {
+    displayName: 'Pricing Card';
+    icon: 'shoppingCart';
+    description: '';
+  };
+  attributes: {
+    planType: Attribute.String;
+    planPrice: Attribute.String;
+    isFeatured: Attribute.Boolean & Attribute.DefaultTo<false>;
+    services: Attribute.Relation<
+      'elements.pricing-card',
+      'oneToMany',
+      'api::service.service'
+    >;
+    link: Attribute.Component<'elements.buton-link'>;
   };
 }
 
@@ -44,7 +100,11 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'blocks.hero': BlocksHero;
+      'blocks.pricing': BlocksPricing;
+      'blocks.row': BlocksRow;
       'elements.buton-link': ElementsButonLink;
+      'elements.card': ElementsCard;
+      'elements.pricing-card': ElementsPricingCard;
       'seo.meta-data': SeoMetaData;
     }
   }
