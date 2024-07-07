@@ -22,6 +22,7 @@ export interface BlocksPricing extends Schema.Component {
   attributes: {
     name: Attribute.String;
     description: Attribute.String;
+    plan: Attribute.Component<'elements.pricing-card', true>;
   };
 }
 
