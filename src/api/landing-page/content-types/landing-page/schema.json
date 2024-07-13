@@ -32,7 +32,8 @@
       "components": [
         "blocks.hero",
         "blocks.row",
-        "blocks.pricing"
+        "blocks.pricing",
+        "blocks.cta"
       ]
     }
   }
